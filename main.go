@@ -1,9 +1,13 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
+
+	"github.com/juancwu/jellyfan/web/server"
 )
 
 func main() {
-    fmt.Println("jellyfan")
+	fmt.Println("jellyfan")
+
+	server.Serve()
 }
