@@ -1,0 +1,14 @@
+package page
+
+import (
+	"github.com/juancwu/jellyfan-web/views/layout"
+	"github.com/juancwu/jellyfan-web/views/component"
+)
+
+templ LandingPage(crumbs []component.Crumb) {
+	@layout.RootLayout("Jellyfan | Landing Page") {
+		@layout.NarrowLayout() {
+			@component.BreadcrumbHeading("Jellyfan Web", crumbs)
+		}
+	}
+}
