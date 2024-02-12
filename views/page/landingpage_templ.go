@@ -11,6 +11,7 @@ import "io"
 import "bytes"
 
 import (
+	"github.com/juancwu/jellyfan-web/route"
 	"github.com/juancwu/jellyfan-web/views/component"
 	"github.com/juancwu/jellyfan-web/views/layout"
 )
@@ -41,6 +42,19 @@ func LandingPage(crumbs []component.Crumb) templ.Component {
 					defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 				}
 				templ_7745c5c3_Err = component.BreadcrumbHeading("Jellyfan Web", crumbs).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" <form method=\"post\" action=\"")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var4 templ.SafeURL = templ.URL(route.ApiV1UploadRoute)
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var4)))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"><input type=\"text\" name=\"filename\"> <select><option></option></select> <button type=\"submit\">Submit</button></form>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

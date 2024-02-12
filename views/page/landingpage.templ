@@ -3,12 +3,20 @@ package page
 import (
 	"github.com/juancwu/jellyfan-web/views/layout"
 	"github.com/juancwu/jellyfan-web/views/component"
+	"github.com/juancwu/jellyfan-web/route"
 )
 
 templ LandingPage(crumbs []component.Crumb) {
 	@layout.RootLayout("Jellyfan | Landing Page") {
 		@layout.NarrowLayout() {
 			@component.BreadcrumbHeading("Jellyfan Web", crumbs)
+            <form method="post" action={templ.URL(route.ApiV1UploadRoute)}>
+                <input type="text" name="filename" />
+                <select>
+                    <option />
+                </select>
+                <button type="submit">Submit</button>
+            </form>
 		}
 	}
 }
