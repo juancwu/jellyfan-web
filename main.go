@@ -32,8 +32,8 @@ func main() {
 		return nil
 	})
 
-    apiGroup := e.Group(route.API_V1_PREFIX)
-    apiGroup.POST(route.API_V1_UPLOAD_SUBPATH, api.Upload)
+	apiGroup := e.Group(route.API_V1_PREFIX)
+	apiGroup.POST(route.API_V1_UPLOAD_SUBPATH, api.Upload)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", os.Getenv("PORT"))))
 }
