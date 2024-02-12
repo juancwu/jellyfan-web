@@ -1,8 +1,7 @@
 package util
 
-import "path/filepath"
+import "strings"
 
-func FileNameWithExt(filename string) bool {
-	fileExt := filepath.Ext(filename)
-	return fileExt != ""
+func JoinAcceptMimeTypes(accept []string) string {
+	return strings.Join(accept, ",")
 }

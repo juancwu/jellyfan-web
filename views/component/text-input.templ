@@ -1,0 +1,33 @@
+package component
+
+import "fmt"
+
+type TextInputProps struct {
+	Type        string
+	Name        string
+	Id          string
+	Label       string
+	Description string
+	Placeholder string
+	Required    bool
+}
+
+templ TextInput(props TextInputProps) {
+	<div>
+		<label for={ props.Id } class="block text-sm font-medium leading-6 text-gray-900">{ props.Label }</label>
+		<div class="mt-2">
+			<input
+				type={ props.Type }
+				name={ props.Name }
+				id={ props.Id }
+				class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+				placeholder={ props.Placeholder }
+				aria-describedby={ fmt.Sprintf("%s-description", props.Id) }
+				required?={ props.Required }
+			/>
+		</div>
+		if props.Description != "" {
+			<p class="mt-2 text-sm text-gray-500" id={ fmt.Sprintf("%s-description", props.Id) }>{ props.Description }</p>
+		}
+	</div>
+}

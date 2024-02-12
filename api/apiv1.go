@@ -2,55 +2,52 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 
+	"github.com/juancwu/jellyfan-web/views/component"
 	"github.com/juancwu/jellyfan-web/views/page"
 	"github.com/labstack/echo/v4"
 )
 
-const (
-    UploadFormFileName = "filename"
-    UploadFormCategory = "category"
-    UploadFormFile = "file"
-)
-
 func Upload(c echo.Context) error {
-    name := c.FormValue(UploadFormFileName)
-    category := c.FormValue(UploadFormCategory)
+	name := c.FormValue(component.UPLOAD_FORM_FILE_NAME)
 
-    file, err := c.FormFile(UploadFormFile)
-    if err != nil {
-        return err
-    }
+	file, err := c.FormFile(component.UPLOAD_FORM_FILE_BLOB)
+	if err != nil {
+		c.Logger().Error(err)
+		return err
+	}
 
-    src, err := file.Open()
-    if err != nil {
-        return err
-    }
-    defer src.Close()
+	src, err := file.Open()
+	if err != nil {
+		c.Logger().Error(err)
+		return err
+	}
+	defer src.Close()
 
-    var custonName string
-    if name != "" {
-        custonName = name
-    } else {
-        custonName = file.Filename
-    }
+	var custonName string
+	if name != "" {
+		custonName = name
+	} else {
+		custonName = file.Filename
+	}
 
-    destPath := filepath.Join(os.Getenv("UPLOAD_DIR"), fmt.Sprintf("%s.%s", custonName, category))
-    dest, err := os.Create(destPath)
-    if err != nil {
-        return err
-    }
-    defer dest.Close()
+	destPath := filepath.Join(os.Getenv("UPLOAD_DIR"), custonName)
+	dest, err := os.Create(destPath)
+	if err != nil {
+		c.Logger().Error(err)
+		return err
+	}
+	defer dest.Close()
 
-    _, err = io.Copy(dest, src)
-    if err != nil {
-        return err
-    }
+	_, err = io.Copy(dest, src)
+	if err != nil {
+		c.Logger().Error(err)
+		return err
+	}
 
-    page.SuccessPage().Render(context.Background(), c.Response().Writer)
-    return nil
+	page.SuccessPage().Render(context.Background(), c.Response().Writer)
+	return nil
 }

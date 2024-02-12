@@ -1,0 +1,33 @@
+package component
+
+import "fmt"
+
+type FileInputProps struct {
+	Name        string
+	Id          string
+	Accept      string
+	Label       string
+	Description string
+	Required    bool
+}
+
+templ FileInput(props FileInputProps) {
+	<div>
+		<input
+			class="block w-full text-sm text-gray-900
+                file:bg-indigo-50 file:rounded-md file:px-2.5 file:py-1.5
+                file:font-semibold file:text-indigo-600 file:shadow-sm file:border-0
+                focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+                focus-visible:outline-indigo-600 hover:file:bg-indigo-100"
+			type="file"
+			id={ props.Id }
+			name={ props.Name }
+			accept={ props.Accept }
+			required?={ props.Required }
+			aria-descripbedby={ fmt.Sprintf("%s-description", props.Id) }
+		/>
+		if props.Description != "" {
+			<p class="mt-2 text-sm text-gray-500" id={ fmt.Sprintf("%s-description", props.Id) }>{ props.Description }</p>
+		}
+	</div>
+}
