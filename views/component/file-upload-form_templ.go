@@ -10,8 +10,6 @@ import "context"
 import "io"
 import "bytes"
 
-import "github.com/juancwu/jellyfan-web/route"
-
 const (
 	UPLOAD_FORM_FILE_NAME = "filename"
 	UPLOAD_FORM_FILE_BLOB = "file"
@@ -30,16 +28,7 @@ func FileUploadForm() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form method=\"post\" action=\"")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var2 templ.SafeURL = templ.URL(route.API_V1_UPLOAD)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var2)))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"space-y-4\" enctype=\"multipart/form-data\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"fileUploadForm\" class=\"space-y-4\" hx-post=\"/api/v1/upload\" hx-encoding=\"multipart/form-data\" _=\"on htmx:xhr:progress(loaded, total) set #fileprogress.value to (loaded/total)*100\n        on htmx:afterOnLoad toggle @disabled on #fileUploadSubmit\n        on htmx:beforeRequest toggle @disabled on #fileUploadSubmit\n        on htmx:afterOnLoad toggle @disabled on #file\n        on htmx:beforeRequest toggle @disabled on #file\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -65,11 +54,11 @@ func FileUploadForm() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = Button(ButtonProps{Text: "Submit", Type: "submit"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button(ButtonProps{Text: "Submit", Type: "submit", Id: "fileUploadSubmit"}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</form>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<progress class=\"block\" id=\"fileprogress\" value=\"0\" max=\"100\"></progress></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

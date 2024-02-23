@@ -15,7 +15,7 @@ import (
 	"github.com/juancwu/jellyfan-web/views/layout"
 )
 
-func LandingPage(crumbs []component.Crumb, alertProps component.AlertProps) templ.Component {
+func LandingPage() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -40,21 +40,7 @@ func LandingPage(crumbs []component.Crumb, alertProps component.AlertProps) temp
 					templ_7745c5c3_Buffer = templ.GetBuffer()
 					defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 				}
-				templ_7745c5c3_Err = component.BreadcrumbHeading("Jellyfan Web", crumbs).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				if alertProps.Message != "" {
-					templ_7745c5c3_Err = component.Alert(alertProps).Render(ctx, templ_7745c5c3_Buffer)
-					if templ_7745c5c3_Err != nil {
-						return templ_7745c5c3_Err
-					}
-				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 class=\"text-2xl font-bold leading-7 text-gray-900 mt-4 sm:truncate sm:text-3xl sm:tracking-tight\">Jellyweb</h1><div id=\"alerts\"></div>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

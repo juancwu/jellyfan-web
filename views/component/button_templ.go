@@ -11,8 +11,10 @@ import "io"
 import "bytes"
 
 type ButtonProps struct {
-	Text string
-	Type string
+	Text        string
+	Type        string
+	Id          string
+	HyperScript string
 }
 
 func Button(props ButtonProps) templ.Component {
@@ -28,7 +30,39 @@ func Button(props ButtonProps) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button type=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<button")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if props.HyperScript != "" {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" _=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(props.HyperScript))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		if props.Id != "" {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" id=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(props.Id))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" type=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -36,14 +70,14 @@ func Button(props ButtonProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"rounded-md bg-indigo-600 px-2.5 py-1.5\n            text-sm font-semibold text-white shadow-sm\n            hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2\n            focus-visible:outline-offset-2 focus-visible:outline-indigo-600\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"rounded-md bg-indigo-600 px-2.5 py-1.5\n            text-sm font-semibold text-white shadow-sm\n            hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2\n            focus-visible:outline-offset-2 focus-visible:outline-indigo-600\n            disabled:cursor-not-allowed disabled:bg-white disabled:hover:bg-white disabled:text-gray-600\n            disabled:ring-gray-300 disabled:focus-visible:outline-gray-600\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(props.Text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/component/button.templ`, Line: 15, Col: 14}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/component/button.templ`, Line: 25, Col: 14}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {

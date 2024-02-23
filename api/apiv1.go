@@ -6,8 +6,9 @@ import (
 	"os"
 	"path/filepath"
 
+	gonanoid "github.com/matoous/go-nanoid/v2"
+
 	"github.com/juancwu/jellyfan-web/views/component"
-	"github.com/juancwu/jellyfan-web/views/page"
 	"github.com/labstack/echo/v4"
 )
 
@@ -49,6 +50,13 @@ func Upload(c echo.Context) error {
 		return err
 	}
 
-	page.LandingPage([]component.Crumb{}, component.AlertProps{Message: "File uploaded!"}).Render(context.Background(), c.Response().Writer)
-	return nil
+	alertId, err := gonanoid.New(6)
+	if err != nil {
+		return err
+	}
+
+	c.Response().Header().Set("HX-Reswap", "afterbegin")
+	c.Response().Header().Set("HX-Retarget", "#alerts")
+
+	return component.Alert("Successfully uploaded file!", "success", alertId).Render(context.Background(), c.Response().Writer)
 }

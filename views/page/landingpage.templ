@@ -5,13 +5,11 @@ import (
 	"github.com/juancwu/jellyfan-web/views/component"
 )
 
-templ LandingPage(crumbs []component.Crumb, alertProps component.AlertProps) {
+templ LandingPage() {
 	@layout.RootLayout("Jellyfan | Landing Page") {
 		@layout.NarrowLayout() {
-			@component.BreadcrumbHeading("Jellyfan Web", crumbs)
-			if alertProps.Message != "" {
-				@component.Alert(alertProps)
-			}
+			<h1 class="text-2xl font-bold leading-7 text-gray-900 mt-4 sm:truncate sm:text-3xl sm:tracking-tight">Jellyweb</h1>
+			<div id="alerts"></div>
 			@component.FileUploadForm()
 		}
 	}

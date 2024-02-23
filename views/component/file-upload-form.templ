@@ -1,14 +1,22 @@
 package component
 
-import "github.com/juancwu/jellyfan-web/route"
-
 const (
 	UPLOAD_FORM_FILE_NAME = "filename"
 	UPLOAD_FORM_FILE_BLOB = "file"
 )
 
 templ FileUploadForm() {
-	<form method="post" action={ templ.URL(route.API_V1_UPLOAD) } class="space-y-4" enctype="multipart/form-data">
+	<form
+		id="fileUploadForm"
+		class="space-y-4"
+		hx-post="/api/v1/upload"
+		hx-encoding="multipart/form-data"
+		_="on htmx:xhr:progress(loaded, total) set #fileprogress.value to (loaded/total)*100
+        on htmx:afterOnLoad toggle @disabled on #fileUploadSubmit
+        on htmx:beforeRequest toggle @disabled on #fileUploadSubmit
+        on htmx:afterOnLoad toggle @disabled on #file
+        on htmx:beforeRequest toggle @disabled on #file"
+	>
 		@TextInput(TextInputProps{
 			Type:        "text",
 			Name:        UPLOAD_FORM_FILE_NAME,
@@ -25,6 +33,7 @@ templ FileUploadForm() {
 			Accept:      "video/mp4,.mkv,video/webm,application/x-bittorrent",
 			Description: "This is the file you want to store in the service.",
 		})
-		@Button(ButtonProps{Text: "Submit", Type: "submit"})
+		@Button(ButtonProps{Text: "Submit", Type: "submit", Id: "fileUploadSubmit"})
+		<progress class="block" id="fileprogress" value="0" max="100"></progress>
 	</form>
 }

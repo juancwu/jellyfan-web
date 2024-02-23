@@ -1,17 +1,27 @@
 package component
 
 type ButtonProps struct {
-	Text string
-	Type string
+	Text        string
+	Type        string
+	Id          string
+	HyperScript string
 }
 
 templ Button(props ButtonProps) {
 	<button
+		if props.HyperScript != "" {
+			_={ props.HyperScript }
+		}
+		if props.Id != "" {
+			id={ props.Id }
+		}
 		type={ props.Type }
 		class="rounded-md bg-indigo-600 px-2.5 py-1.5
             text-sm font-semibold text-white shadow-sm
             hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2
-            focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+            disabled:cursor-not-allowed disabled:bg-white disabled:hover:bg-white disabled:text-gray-600
+            disabled:ring-gray-300 disabled:focus-visible:outline-gray-600"
 	>
 		{ props.Text }
 	</button>

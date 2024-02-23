@@ -34,7 +34,7 @@ func FileInput(props FileInputProps) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><input class=\"block w-full text-sm text-gray-900\n                file:bg-indigo-50 file:rounded-md file:px-2.5 file:py-1.5\n                file:font-semibold file:text-indigo-600 file:shadow-sm file:border-0\n                focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2\n                focus-visible:outline-indigo-600 hover:file:bg-indigo-100\" type=\"file\" id=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><input class=\"block w-full text-sm text-gray-900\n                file:bg-indigo-600 file:rounded-md file:px-2.5 file:py-1.5\n                file:font-semibold file:text-white file:shadow-sm file:border-0\n                focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2\n                focus-visible:outline-indigo-600 hover:file:bg-indigo-500\" type=\"file\" id=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
