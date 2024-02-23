@@ -7,6 +7,8 @@ templ RootLayout(title string) {
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<link rel="stylesheet" href="/static/styles.css"/>
+			<script src="/static/hyperscript.min.js"></script>
+			<script src="/static/htmx.min.js"></script>
 			if len(title) > 0 {
 				<title>{ title }</title>
 			} else {
