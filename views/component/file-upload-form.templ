@@ -15,6 +15,7 @@ templ FileUploadForm() {
 			Id:          "customFileName",
 			Description: "This will be used to overwrite the original file name.",
 			Placeholder: "Custom file name...",
+			Disabled:    true,
 		})
 		@FileInput(FileInputProps{
 			Name:        UPLOAD_FORM_FILE_BLOB,

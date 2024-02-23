@@ -49,6 +49,7 @@ func FileUploadForm() templ.Component {
 			Id:          "customFileName",
 			Description: "This will be used to overwrite the original file name.",
 			Placeholder: "Custom file name...",
+			Disabled:    true,
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
