@@ -12,7 +12,7 @@ import (
 )
 
 func Upload(c echo.Context) error {
-	name := c.FormValue(component.UPLOAD_FORM_FILE_NAME)
+	// name := c.FormValue(component.UPLOAD_FORM_FILE_NAME)
 
 	file, err := c.FormFile(component.UPLOAD_FORM_FILE_BLOB)
 	if err != nil {
@@ -27,14 +27,15 @@ func Upload(c echo.Context) error {
 	}
 	defer src.Close()
 
-	var custonName string
-	if name != "" {
-		custonName = name
-	} else {
-		custonName = file.Filename
-	}
+	// var custonName string
+	// if name != "" {
+	// 	custonName = name
+	// } else {
+	// 	custonName = file.Filename
+	// }
 
-	destPath := filepath.Join(os.Getenv("UPLOAD_DIR"), custonName)
+	// destPath := filepath.Join(os.Getenv("UPLOAD_DIR"), custonName)
+	destPath := filepath.Join(os.Getenv("UPLOAD_DIR"), file.Filename)
 	dest, err := os.Create(destPath)
 	if err != nil {
 		c.Logger().Error(err)
@@ -48,6 +49,6 @@ func Upload(c echo.Context) error {
 		return err
 	}
 
-	page.SuccessPage().Render(context.Background(), c.Response().Writer)
+	page.LandingPage([]component.Crumb{}, component.AlertProps{Message: "File uploaded!"}).Render(context.Background(), c.Response().Writer)
 	return nil
 }
