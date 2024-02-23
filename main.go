@@ -28,7 +28,16 @@ func main() {
 	e.Static("/static", "static")
 
 	e.GET("/", func(c echo.Context) error {
-		page.LandingPage([]component.Crumb{}).Render(context.Background(), c.Response().Writer)
+		msg := c.QueryParam("msg")
+		var alertProps component.AlertProps
+		// msgType := c.QueryParam("type")
+		if msg != "" {
+			alertProps = component.AlertProps{
+				Message: msg,
+				Type:    "success",
+			}
+		}
+		page.LandingPage([]component.Crumb{}, alertProps).Render(context.Background(), c.Response().Writer)
 		return nil
 	})
 
