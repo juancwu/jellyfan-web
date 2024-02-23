@@ -22,7 +22,7 @@ templ FileUploadForm() {
 			Id:          "file",
 			Label:       "Select a file",
 			Required:    true,
-			Accept:      "video/mp4,video/x-matroska,video/mkv,video/webm,application/x-bittorrent",
+			Accept:      "video/mp4,.mkv,video/webm,application/x-bittorrent",
 			Description: "This is the file you want to store in the service.",
 		})
 		@Button(ButtonProps{Text: "Submit", Type: "submit"})

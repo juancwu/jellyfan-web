@@ -59,7 +59,7 @@ func FileUploadForm() templ.Component {
 			Id:          "file",
 			Label:       "Select a file",
 			Required:    true,
-			Accept:      "video/mp4,video/x-matroska,video/mkv,video/webm,application/x-bittorrent",
+			Accept:      "video/mp4,.mkv,video/webm,application/x-bittorrent",
 			Description: "This is the file you want to store in the service.",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
